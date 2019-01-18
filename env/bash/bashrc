@@ -44,12 +44,13 @@ function parse_git_branch {
 }
 
 function parse_git_dirty {
-    local status=$(git status 2> /dev/null | tail -n1)
-    local empty_1="nothing to commit, working tree clean"
-    local empty_2='nothing to commit (create/copy files and use "git add" to track)'
+    local status=$(git status -s 2> /dev/null | tail -n1)
+    # local empty_1="nothing to commit, working tree clean"
+    # local empty_2='nothing to commit (create/copy files and use "git add" to track)'
 
     # [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo "*"
-    [[ $status != $empty_1 ]] && [[ $status != $empty_2 ]] && echo "*"
+    # [[ $status != $empty_1 ]] && [[ $status != $empty_2 ]] && echo "*"
+    [[ -n $status ]] && echo "*"
 }
 
 # set variable identifying the chroot you work in (used in the prompt below)
