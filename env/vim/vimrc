@@ -1,0 +1,338 @@
+" environment settings {{{
+set nocompatible
+filetype off
+
+" {{{ syntax highlight
+syntax enable
+syntax on
+" }}}
+
+" setting encoding {{{
+set encoding=utf-8
+set fileencodings=utf-8,gb2312,gbk
+set fileencoding=utf-8
+set termencoding=utf-8
+" }}}
+
+" tab settings {{{
+" set tab to 4 spaces
+set tabstop=4
+set expandtab
+" fix problems with backspace
+set backspace=indent,eol,start
+" }}}
+
+" indent settings {{{
+set autoindent
+set smartindent
+set shiftwidth=4
+set softtabstop=4
+" }}}
+
+" search settings {{{
+
+" set searching is case-insensitive
+set ignorecase
+" searching is case-sensitive if there is a capital charachter
+set smartcase
+
+" }}}
+
+" Vim style settings{{{
+set t_Co=256
+" set termguicolors
+set background=dark
+" colorscheme Tomorrow-Night-Eighties
+colorscheme solarized
+
+" set highlight
+hi VertSplit ctermfg=0 ctermbg=0 gui=reverse
+hi SignColumn  ctermfg=11 ctermbg=0 guifg=Cyan guibg=Grey
+hi ALEErrorSign  ctermfg=196 ctermbg=0
+hi ALEErrorLine  ctermbg=233
+hi ALEWarningSign  ctermfg=142 ctermbg=0
+" }}}
+
+" general settings {{{
+
+" show row number
+set number
+" set relativenumber
+" set leader
+let mapleader = ","
+
+" set fold method
+" set foldmethod=marker
+" set foldmethod=manual
+set foldmethod=indent
+" set foldcolumn=1
+" let javaScript_fold=1
+" set foldlevelstart=99
+
+" show newline, tab
+set list
+" newline character
+set listchars=eol:⇠,tab:>.
+" set 80 column highlight
+set cc=81
+
+" set mouse
+set clipboard=unnamed
+set mouse=a
+" }}}
+
+" }}}
+
+" plugin settings {{{
+
+" call vundle#end()
+call plug#begin('~/.vim/plugged')
+
+Plug 'Valloric/YouCompleteMe'
+
+Plug 'w0rp/ale'
+Plug 'marijnh/tern_for_vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'majutsushi/tagbar'
+
+Plug 'Yggdroot/indentLine'
+
+" snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+Plug 'jiangmiao/auto-pairs'
+
+" Plug 'davidhalter/jedi-vim'
+
+Plug 'Chiel92/vim-autoformat'
+
+Plug 'posva/vim-vue'
+
+Plug 'Raimondi/delimitMate'
+
+Plug 'maksimr/vim-jsbeautify'
+
+Plug 'mattn/emmet-vim'
+
+" Plug 'python-mode/python-mode', { 'branch': 'develop' }
+call plug#end()
+
+filetype plugin indent on
+" }}}
+
+" YouCompleteme settings {{{
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+
+" global conf
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+" do NOT ask me load conf or not
+let g:ycm_confirm_extrm_conf = 0
+
+" set for python completion
+let g:ycm_python_binary_path = 'python2'
+
+let g:ycm_path_to_python_interpreter = 'python2'
+
+" set for java completion
+let g:EclimCompletionMethod = 'omnifunc'
+let g:syntastic_java_checkers = []
+let g:EclimFileTypeValidate = 0
+
+let g:ycm_show_diagnostics_ui = 0
+
+" html
+let g:ycm_semantic_triggers = {
+    \   'css': [ 're!^\s{4}', 're!:\s+'],
+    \   'html': [ '</', '<' ],
+    \   'vue': [ '</', '<' ]
+    \ }
+" }}}
+
+" nerdcommentor settings {{{
+" add a space after comment delimiters
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following
+"   code indentation
+let g:NERDDefaultAlign = 'left'
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+let g:NERDCustomDelimiters = {
+        \ 'tiny': {'left': '{', 'right': '}'}
+    \ }
+" }}}
+
+" airline settings {{{
+
+set laststatus=2
+
+let g:airline#extensions#ycm#enabled=0
+let g:airline_theme='angr'
+" let g:airline_powerline_fonts=1
+" }}}
+
+" nerdtree settings {{{
+let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]', '\.pro.user$[[file]]', 'node_modules']
+" }}}
+
+" ale settings {{{
+let g:ale_linters_explicit = 1
+let g:ale_completion_enabled = 1
+let g:ale_completion_delay = 200
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 200
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+" gnu90 is the default one
+let g:ale_c_gcc_options = '-Wall -O2 -std=gnu90'
+" let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+
+let g:ale_linters = {'c':['gcc', 'cppcheck'],
+                    \ 'python':['flake8' ,'autopep8'],
+                    \ 'cpp':['g++', 'cpplint'],
+                    \ 'thrift':['thrift'],
+                    \ 'javascript':['eslint'],
+                    \ }
+
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+let g:ale_set_highlights = 0
+let g:ale_set_signs = 1
+let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_python_pylint_options =
+        \ "--generated-members=objects"
+" }}}
+
+" tagbar settings {{{
+
+let g:tagbar_compact = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_iconchars = ['▸', '▾']
+let g:tagbar_sort = 0
+let g:tagbar_ctags_bin = 'ctags'
+
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'Css',
+    \ 'kinds' : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
+
+" }}}
+
+" ultisnips settings {{{
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+let g:ultisnips_python_style = "google"
+" }}}
+
+" auto-pairs settings {{{
+" fast wrap
+let g:AutoPairsShortcutFastWrap = mapleader.'('
+" }}}
+
+" jedi-vim settings {{{
+
+" }}}
+
+" python-mode settings {{{
+" }}}
+
+" functions {{{
+func! SwitchMouseModel()
+    if &mouse == 'a'
+        exec 'set mouse=v'
+    elseif &mouse == 'v'
+        exec 'set mouse=a'
+    endif
+endfunc
+
+" func LastModified()
+"     call cursor(1, 1)
+"     let modifiedDateLine = search("# Modified:")
+"     if modifiedDateLine != 0
+"         call setline(modifiedDateLine,
+"                     \ '# Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
+"     endif
+" endfunc
+" }}}
+
+" norma mode mappings {{{
+
+nnoremap <F2> :NERDTreeToggle <cr>
+nnoremap <F3> :call SwitchMouseModel() <cr>
+" nnoremap <F4> :call SetComment() <cr>
+nnoremap <F5> :Tagbar <cr>
+nnoremap <F10> :call SetHeaderComment() <cr>
+
+
+" hlsearch settings
+noremap n :set hlsearch<cr>n
+noremap N :set hlsearch<cr>N
+noremap / :set hlsearch incsearch<cr>/
+noremap ? :set hlsearch<cr>?
+noremap * *:set hlsearch<cr>
+
+" }}}
+
+" map settings {{{
+
+map gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" }}}
+
+" insert mode settings {{{
+
+" }}}
+
+" auto cmds {{{
+
+" set nohlsearch when cursorhold
+autocmd cursorhold,InsertEnter * set nohlsearch noincsearch
+" highlight the char with column index 80
+autocmd BufWinEnter *.h,*.cpp,*.c,*.py,*.js,*.sh,*.java
+        \ let w:m2=matchadd('ErrorMsg', '\%81v.', -1)
+
+" delete the backspaces at the end of the line
+autocmd BufWritePre  *
+        \ exec ':%s/\s\+$//e'
+
+" close the nerdtree when the target is empty
+autocmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTree') &&
+        \ b:NERDTree.isTabTree()) | q |
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python,html,vue set foldmethod=indent
+
+" }}}
+
+" global settings {{{
+
+" set add comment sign when enter
+set formatoptions+=ro
+
+" }}}
