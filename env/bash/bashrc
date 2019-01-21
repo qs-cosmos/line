@@ -192,3 +192,9 @@ alias ll='ls -al'
 # export JRE_HOME=$JAVA_HOME/jre
 # export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/lib
 # export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+
+# QT
+export QT_BASE=/home/qingsong/program/qt/5.12.0/5.12.0/gcc_64/
+export PATH=$QT_BASE/bin:$PATH
+export MANPATH=$QT_BASE/man:$MANPATH
+export LD_LIBRARY_PATH=$QT_BASE/lib:$LD_LIBRARY_PATH
