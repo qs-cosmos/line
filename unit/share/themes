@@ -1,0 +1,13 @@
+[Grub2]
+https://www.gnome-look.org/p/1009237 grub-themes-stylishdark
+
+[Login]
+https://www.gnome-look.org/p/1241489 Ocean-blue-GDM theme for ubuntu
+
+[Gnome-Shell]
+sudo apt-get install arc-theme Arc-Dark
+
+[Icon]
+https://www.gnome-look.org/p/1279924 Tela-icon-theme
+--Replace--
+netease-cloud-music.svg
