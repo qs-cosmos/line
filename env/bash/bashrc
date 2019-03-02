@@ -140,6 +140,14 @@ fi
 alias l='ls -l'
 alias ll='ls -al'
 
+# Commonly Used Configure File
+export bashrc=$HOME/.bashrc
+export vimrc=$HOME/.vimrc
+
+# Commonly Used Workspace
+export workspace=$HOME/workspace
+export pecker=$workspace/woodpecker
+
 # Set nvm
 # export NVM_DIR=$(realpath "$HOME/.nvm")
 # This loads nvm
@@ -182,10 +190,6 @@ alias ll='ls -al'
 # export pecker=$RUNTIME_ROOT/app/content/pecker
 # export vim_plugs=$HOME/.vim/plugged
 # export extend_scripts=$HOME/.extend_command/scripts
-
-# Commonly Used Configure File
-# export bashrc=$HOME/.bashrc
-# export vimrc=$HOME/.vimrc
 
 # JAVA
 # export JAVA_HOME=/data00/tiger/jdk/jdk1.8.0_131

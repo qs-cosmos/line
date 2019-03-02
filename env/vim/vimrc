@@ -126,6 +126,7 @@ Plug 'maksimr/vim-jsbeautify'
 
 Plug 'mattn/emmet-vim'
 
+Plug 'lervag/vimtex'
 " Plug 'python-mode/python-mode', { 'branch': 'develop' }
 call plug#end()
 
@@ -164,6 +165,13 @@ let g:ycm_semantic_triggers = {
     \   'html': [ '</', '<' ],
     \   'vue': [ '</', '<' ]
     \ }
+
+" ycm
+" if !exists('g:ycm_semantic_triggers')
+"     let g:ycm_semantic_triggers = {}
+" endif
+" let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+
 " }}}
 
 " nerdcommentor settings {{{
