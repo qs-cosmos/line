@@ -57,18 +57,12 @@ flags = [
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
-'-x',
-'c++',
-'-I',
-'.',
-'-isystem',
-'/usr/include',
-'-isystem',
-'/usr/include/c++/7',
-'-isystem',
-'/usr/lib/gcc/x86_64-linux-gnu/7/include',
-'-isystem',
-'/usr/local/include',
+'-x', 'c++',
+'-I', '.',
+'-isystem', '/usr/include/c++/7.3.0',
+'-isystem', '/usr/lib/gcc/x86_64-linux-gnu/7.3.0/include',
+'-isystem', '/usr/local/include',
+'-isystem', '/usr/include',
 ]
 
 

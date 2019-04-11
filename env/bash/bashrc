@@ -148,6 +148,9 @@ export vimrc=$HOME/.vimrc
 export workspace=$HOME/workspace
 export pecker=$workspace/woodpecker
 
+# Commonly Used Path
+export tmp=$HOME/.tmp
+
 # Set nvm
 # export NVM_DIR=$(realpath "$HOME/.nvm")
 # This loads nvm
