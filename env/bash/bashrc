@@ -205,3 +205,4 @@ export QT_BASE=/home/qingsong/program/qt/5.12.0/5.12.0/gcc_64/
 export PATH=$QT_BASE/bin:$PATH
 export MANPATH=$QT_BASE/man:$MANPATH
 export LD_LIBRARY_PATH=$QT_BASE/lib:$LD_LIBRARY_PATH
+export CPLUS_INCLUDE_PATH=$QT_BASE/include
