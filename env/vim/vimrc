@@ -3,6 +3,7 @@ set nocompatible
 filetype off
 
 " {{{ syntax highlight
+filetype plugin on
 syntax enable
 syntax on
 " }}}
@@ -142,10 +143,10 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 
 " global conf
-let g:ycm_global_ycm_extra_conf = '~/workspace/line/env/vim/ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " do NOT ask me load conf or not
-let g:ycm_confirm_extrm_conf = 0
+let g:ycm_confirm_extra_conf = 1
 
 " set for python completion
 let g:ycm_python_binary_path = 'python3'
@@ -213,18 +214,21 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
+" let g:ale_c_parse_compile_commands = 1
 
 " gnu90 is the default one
 let g:ale_c_gcc_options = '-Wall -O2 -std=gnu90'
 " let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11 -fPIC'
 
+" let g:ale_cpp_clangcheck_executable = 'clangcheck'
+" let g:ale_cpp_clangcheck_options = '-extra-arg=-Wall'
+let g:ale_cpp_clangtidy_executable = 'clangtidy'
+let g:ale_cpp_clangtidy_options = '-extra-arg=-Wall'
 
-let g:ale_linters = {'c':['gcc', 'cppcheck'],
+let g:ale_linters = {'c':['gcc'],
                     \ 'python':['flake8' ,'autopep8'],
-                    \ 'cpp':['g++', 'cpplint'],
+                    \ 'cpp':[ 'g++'],
                     \ 'thrift':['thrift'],
                     \ 'javascript':['eslint'],
                     \ }
@@ -342,6 +346,7 @@ autocmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTree') &&
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python,html,vue set foldmethod=indent
 
+autocmd FileType make set nolist
 " }}}
 
 " global settings {{{
