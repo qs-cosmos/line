@@ -59,8 +59,11 @@ flags = [
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x', 'c++',
 '-I', '.',
-'-isystem', '/usr/include/c++/7.3.0',
-'-isystem', '/usr/lib/gcc/x86_64-linux-gnu/7.3.0/include',
+# For the QT project
+'-I', '/home/qingsong/program/qt/5.12.0/5.12.0/gcc_64/include',
+'-isystem', '/usr/include/c++/7',
+'-isystem', '/usr/lib/gcc/x86_64-linux-gnu/7/include',
+'-isystem', '/usr/include/x86_64-linux-gnu/',
 '-isystem', '/usr/local/include',
 '-isystem', '/usr/include',
 ]
