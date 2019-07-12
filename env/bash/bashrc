@@ -45,11 +45,6 @@ function parse_git_branch {
 
 function parse_git_dirty {
     local status=$(git status -s 2> /dev/null | tail -n1)
-    # local empty_1="nothing to commit, working tree clean"
-    # local empty_2='nothing to commit (create/copy files and use "git add" to track)'
-
-    # [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo "*"
-    # [[ $status != $empty_1 ]] && [[ $status != $empty_2 ]] && echo "*"
     [[ -n $status ]] && echo "*"
 }
 
@@ -80,7 +75,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h\[\033[00m\]:\[\033[00;34m\]\w\[\033[00;36m\]$(parse_git_branch)\[\033[00m\]\n\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[00;36m\]\u@\h\[\033[00m\]:\[\033[00;34m\]\w\[\033[00;32m\]$(parse_git_branch)\[\033[00m\]\n\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -135,74 +130,30 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 # Set alias
 alias l='ls -l'
 alias ll='ls -al'
 
-# Commonly Used Configure File
+# Set Commonly Used Configure File
 export bashrc=$HOME/.bashrc
 export vimrc=$HOME/.vimrc
 
-# Commonly Used Workspace
+# Set Commonly Used Path
 export workspace=$HOME/workspace
 export pecker=$workspace/woodpecker
-
-# Commonly Used Path
 export tmp=$HOME/.tmp
 
-# Set nvm
-# export NVM_DIR=$(realpath "$HOME/.nvm")
-# This loads nvm
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# This loads nvm bash_completion
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# Set Extend Script Path
+export EXTEND_COMMAND=$HOME/.extend_command
+export PATH=$EXTEND_COMMAND:$PATH
 
-# export https_proxy=10.110.216.52:3128
-# export http_proxy=10.110.216.52:3128
+# Set Local Path
+export LOCAL_BASE=/home/qingsong/.local
+export CPLUS_INCLUDE_PATH=$LOCAL_BASE/include:$CPLUS_INCLUDE_PATH
 
-# Set nodejs 8.1.4
-# nvm use --delete-prefix v8.13.0 &>/dev/null
-
-# PATH
-# export PATH=$HOME/.local/bin:$PATH
-
-# Repos Runtime Tools
-# export RUNTIME_ROOT=$HOME/repos/toutiao
-# export PATH=$RUNTIME_ROOT/runtime:$PATH
-
-# EXTEND_COMMAND
-# export EXTEND_COMMAND=$HOME/.extend_command
-# export PATH=$EXTEND_COMMAND/scripts:$EXTEND_COMMAND/temp:$PATH
-
-# Tree Command
-# export PATH=$EXTEND_COMMAND/tree-1.7.0:$PATH
-
-# eslint
-# export ESLINT_HOME=$EXTEND_COMMAND/eslint_v_5.1.0/
-# export PATH=$ESLINT_HOME/node_modules/.bin/:$PATH
-
-# PYTHONPATH
-# export PYTHONPATH=$HOME/repos:$HOME/repos/pyutil:$HOME/repos/ss_thrift_gen
-# export PYTHONPATH=$RUNTIME_ROOT/app/content/lib:$RUNTIME_ROOT/lib:$PYTHONPATH
-
-#  Commonly Used Directory
-# export content=$RUNTIME_ROOT/app/content
-# export temp=$HOME/temp
-# export toutiao=$RUNTIME_ROOT
-# export pecker=$RUNTIME_ROOT/app/content/pecker
-# export vim_plugs=$HOME/.vim/plugged
-# export extend_scripts=$HOME/.extend_command/scripts
-
-# JAVA
-# export JAVA_HOME=/data00/tiger/jdk/jdk1.8.0_131
-# export JRE_HOME=$JAVA_HOME/jre
-# export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/lib
-# export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-
-# QT
+# Set QT Path
 export QT_BASE=/home/qingsong/program/qt/5.12.0/5.12.0/gcc_64/
 export PATH=$QT_BASE/bin:$PATH
 export MANPATH=$QT_BASE/man:$MANPATH
 export LD_LIBRARY_PATH=$QT_BASE/lib:$LD_LIBRARY_PATH
-export CPLUS_INCLUDE_PATH=$QT_BASE/include
+export CPLUS_INCLUDE_PATH=$QT_BASE/include:$CPLUS_INCLUDE_PATH
