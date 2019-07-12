@@ -1,0 +1,6 @@
+# Temporary Path
+
+# Temporary Files
+*.swp
+*.o
+*.pyc
