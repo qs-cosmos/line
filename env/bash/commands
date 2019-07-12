@@ -1,0 +1,14 @@
+#!/bin/bash
+exit
+
+# Pandoc to pdf command
+pandoc \
+    -N \
+    -f markdown+smart \
+    --pdf-engine=xelatex \
+    --highlight-style tango \
+    -V CJKmainfont:"宋体" \
+    -V geometry:"margin=20mm" \
+    -V colorlinks \
+    -V urlcolor=NavyBlue \
+    $1 -o $2
