@@ -1,87 +1,74 @@
-" Environment Settings {{{
+" environment {
+
 set nocompatible
+
 filetype off
 
-" {{{ Set Syntax Highlight
+let mapleader = ","
+
+set clipboard=unnamed,unnamedplus
+
+set mouse=a
+
+" }
+
+" syntax highlight {
 
 filetype plugin on
 syntax enable
 syntax on
 
-" }}}
+" }
 
-" Set Encoding {{{
+" encoding {
 
 set encoding=utf-8
 set fileencodings=utf-8,gb2312,gbk
-set fileencoding=utf-8
 set termencoding=utf-8
 
-" }}}
+" }
 
-" Tab settings {{{
+" spaces {
 
-" set tab to 4 spaces
 set tabstop=4
 set noexpandtab
-
-" fix problems with backspace
 set backspace=indent,eol,start
 
-" }}}
+" }
 
-" indent settings {{{
+" indent {
 
 set autoindent
 set smartindent
 set shiftwidth=4
 set softtabstop=4
 
-" }}}
+" }
 
-" Set Text Search Style {{{
+" text search style {
 
-" set searching is case-insensitive
+" default to be case-insensitive.
 set ignorecase
 
-" searching is case-sensitive if there is a capital charachter
+" set to be case-sensitive if exists upper case charachters.
 set smartcase
 
-" }}}
+" }
 
-" Set Vim Display Style {{{
+" display style {
 
 set t_Co=256
-
-" set termguicolors
 set background=dark
-
-" set colorscheme
 colorscheme solarized
 
-" show row number
 set number
-
-" set leader
-let mapleader = ","" set text fold
 set foldmethod=indent
 
-" show newline, tab
 set list
-
-" newline character
 set listchars=eol:⇠,tab:>-,nbsp:-,trail:-
 
-" set 80 column highlight
+" highlight the 81th column
 set cc=81
-
-" set mouse
-set clipboard=unnamed,unnamedplus
-set mouse=a
-
-" }}}
-
-" Set Highlight Colors {{{
 
 " the vertical split terminal line
 hi VertSplit ctermfg=23 ctermbg=8 gui=reverse
@@ -101,10 +88,9 @@ hi ALEErrorSign  ctermfg=196 ctermbg=0
 hi ALEErrorLine  ctermbg=233
 hi ALEWarningSign  ctermfg=142 ctermbg=0
 
-" }}}
+" }
 
-
-" Set Vim-plug {{{
+" Set Vim-plug {
 
 call plug#begin('~/.vim/plugged')
 
@@ -144,9 +130,10 @@ Plug 'godlygeek/tabular'
 call plug#end()
 
 filetype plugin indent on
-" }}}
 
-" Set YouCompleteme {{{
+" }
+
+" YouCompleteMe {
 
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
@@ -178,9 +165,9 @@ let g:ycm_semantic_triggers = {
     \   'vue': [ '</', '<' ]
     \ }
 
-" }}}
+" }
 
-" Set Nerdcommentor {{{
+" nerdcommenter {
 
 " add a space after comment delimiters
 let g:NERDSpaceDelims = 1
@@ -198,23 +185,23 @@ let g:NERDCustomDelimiters = {
         \ 'tiny': {'left': '{', 'right': '}'}
     \ }
 
-" }}}
+" }
 
-" Set Airline {{{
+" vim-airline {
 
 set laststatus=2
 let g:airline#extensions#ycm#enabled=0
 let g:airline_theme='luna'
 
-" }}}
+" }
 
-" Set Nerdtree {{{
+" nerdtree {
 
-" let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]', '\.pro.user$[[file]]', 'node_modules']
+let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]', '\.pro.user$[[file]]', 'node_modules']
 
-" }}}
+" }
 
-" Set Ale {{{
+" ale {
 
 let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 1
@@ -247,9 +234,9 @@ let g:ale_set_signs = 1
 let g:ale_warn_about_trailing_whitespace = 0
 let g:ale_python_pylint_options = "--generated-members=objects"
 
-" }}}
+" }
 
-" Set Tagbar {{{
+" tagbar {
 
 let g:tagbar_compact = 1
 let g:tagbar_autoshowtag = 1
@@ -266,24 +253,24 @@ let g:tagbar_type_css = {
     \ ]
 \ }
 
-" }}}
+" }
 
-" Set Ultisnips {{{
+" ultisnips {
 
 let g:UltiSnipsExpandTrigger = "<c-j>"
 let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 let g:ultisnips_python_style = "google"
 
-" }}}
+" }
 
-" Set Auto-pairs {{{
+" auto-pairs {
 
 let g:AutoPairsShortcutFastWrap = mapleader.'('
 
-" }}}
+" }
 
-" Self Define Functions {{{
+" function {
 
 func! SwitchMouseModel()
     if &mouse == 'a'
@@ -293,14 +280,13 @@ func! SwitchMouseModel()
     endif
 endfunc
 
-" }}}
+" }
 
-" Set Normal Mode Key Maps {{{
+" key-map {
 
 nnoremap <F2> :NERDTreeToggle <cr>
 nnoremap <F3> :call SwitchMouseModel() <cr>
 
-" nnoremap <F4> :call SetComment() <cr>
 nnoremap <F5> :Tagbar <cr>
 nnoremap <F10> :call SetHeaderComment() <cr>
 
@@ -311,15 +297,11 @@ noremap / :set hlsearch incsearch<cr>/
 noremap ? :set hlsearch<cr>?
 noremap * *:set hlsearch<cr>
 
-" }}}
-
-" Set General Key Map {{{
-
 map gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" }}}
+" }
 
-" Set Auto CMDs {{{
+" auto cmd {
 
 " nohlsearch when cursorhold
 autocmd cursorhold,InsertEnter * set nohlsearch noincsearch
@@ -342,11 +324,11 @@ autocmd FileType python,html,vue set foldmethod=indent
 " not display listchars in Makefile
 autocmd FileType make set nolist
 
-"}}}
+"}
 
-" Global Settings {{{
+" format {
 
 " add comment sign when enter
 set formatoptions+=ro
 
-" }}}
+" }
