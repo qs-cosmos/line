@@ -68,7 +68,7 @@ set list
 set listchars=eol:⇠,tab:>-,nbsp:-,trail:-
 
 " highlight the 81th column
-set cc=81
+set colorcolumn=81
 
 " the vertical split terminal line
 hi VertSplit ctermfg=23 ctermbg=8 gui=reverse
@@ -90,42 +90,31 @@ hi ALEWarningSign  ctermfg=142 ctermbg=0
 
 " }
 
-" Set Vim-plug {
+" vim-plug {
 
 call plug#begin('~/.vim/plugged')
 
+" code
+
 Plug 'Valloric/YouCompleteMe'
-
-Plug 'w0rp/ale'
-Plug 'marijnh/tern_for_vim'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
 
 Plug 'majutsushi/tagbar'
 
 Plug 'Yggdroot/indentLine'
 
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
 Plug 'jiangmiao/auto-pairs'
 
-Plug 'Chiel92/vim-autoformat'
-
-Plug 'posva/vim-vue'
-
-Plug 'Raimondi/delimitMate'
-
-Plug 'maksimr/vim-jsbeautify'
-
-Plug 'mattn/emmet-vim'
-
-Plug 'lervag/vimtex'
-
 Plug 'godlygeek/tabular'
+
+Plug 'scrooloose/nerdcommenter'
+
+" style
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 call plug#end()
 
@@ -135,35 +124,37 @@ filetype plugin indent on
 
 " YouCompleteMe {
 
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
 " general settings
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_tags_files           = 1
+let g:ycm_seed_identifiers_with_syntax                  = 1
+let g:ycm_autoclose_preview_window_after_insertion      = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_complete_in_comments    = 1
+let g:ycm_complete_in_strings     = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_echo_current_diagnostic = 0
+let g:ycm_confirm_extra_conf      = 0
 
-" not ask me if load conf or not
-let g:ycm_confirm_extra_conf = 1
-
-" python completion
-let g:ycm_python_binary_path = 'python3'
+" path
 let g:ycm_path_to_python_interpreter = 'python3'
+let g:ycm_python_binary_path         = 'python3'
+let g:ycm_global_ycm_extra_conf      = '~/.ycm_extra_conf.py'
 
-" java completion
-let g:EclimCompletionMethod = 'omnifunc'
-let g:syntastic_java_checkers = []
-let g:EclimFileTypeValidate = 0
+" }
 
-" html
-let g:ycm_semantic_triggers = {
-    \   'css': [ 're!^\s{4}', 're!:\s+'],
-    \   'html': [ '</', '<' ],
-    \   'vue': [ '</', '<' ]
-    \ }
+" tagbar {
+
+let g:tagbar_compact = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_iconchars = ['▸', '▾']
+let g:tagbar_sort = 0
+let g:tagbar_ctags_bin = 'ctags'
+
+" }
+
+" nerdtree {
+
+let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]', '\.pro.user$[[file]]', 'node_modules']
 
 " }
 
@@ -195,119 +186,52 @@ let g:airline_theme='luna'
 
 " }
 
-" nerdtree {
-
-let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]', '\.pro.user$[[file]]', 'node_modules']
-
-" }
-
-" ale {
-
-let g:ale_linters_explicit = 1
-let g:ale_completion_enabled = 1
-let g:ale_completion_delay = 200
-let g:ale_echo_delay = 20
-let g:ale_lint_delay = 200
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:airline#extensions#ale#enabled = 1
-
-" gnu90 is the default one
-let g:ale_c_gcc_options = '-Wall -O2 -std=gnu90'
-
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11 -fPIC'
-
-let g:ale_cpp_clangtidy_executable = 'clangtidy'
-let g:ale_cpp_clangtidy_options = '-extra-arg=-Wall'
-let g:ale_linters = {'c':['gcc'],
-                    \ 'python':['flake8' ,'autopep8'],
-                    \ 'cpp':[ 'g++'],
-                    \ 'thrift':['thrift'],
-                    \ 'javascript':['eslint'],
-                    \ }
-
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
-let g:ale_set_highlights = 0
-let g:ale_set_signs = 1
-let g:ale_warn_about_trailing_whitespace = 0
-let g:ale_python_pylint_options = "--generated-members=objects"
-
-" }
-
-" tagbar {
-
-let g:tagbar_compact = 1
-let g:tagbar_autoshowtag = 1
-let g:tagbar_iconchars = ['▸', '▾']
-let g:tagbar_sort = 0
-let g:tagbar_ctags_bin = 'ctags'
-
-let g:tagbar_type_css = {
-\ 'ctagstype' : 'Css',
-    \ 'kinds' : [
-        \ 'c:classes',
-        \ 's:selectors',
-        \ 'i:identities'
-    \ ]
-\ }
-
-" }
-
-" ultisnips {
-
-let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-let g:ultisnips_python_style = "google"
-
-" }
-
-" auto-pairs {
-
-let g:AutoPairsShortcutFastWrap = mapleader.'('
-
-" }
-
 " function {
 
-func! SwitchMouseModel()
-    if &mouse == 'a'
-        exec 'set mouse=v'
-    elseif &mouse == 'v'
-        exec 'set mouse=a'
-    endif
+" others
+function! SwitchMouseModel()
+	if &mouse == 'a'
+		exec 'set mouse=v'
+	elseif &mouse == 'v'
+		exec 'set mouse=a'
+	endif
 endfunc
 
 " }
 
 " key-map {
 
-nnoremap <F2> :NERDTreeToggle <cr>
-nnoremap <F3> :call SwitchMouseModel() <cr>
+" YouCompleteMe
+map gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+" tagbar
 nnoremap <F5> :Tagbar <cr>
-nnoremap <F10> :call SetHeaderComment() <cr>
 
-" hlsearch settings
+" nerdtree
+nnoremap <F2> :NERDTreeToggle <cr>
+
+" hlsearch
 noremap n :set hlsearch<cr>n
 noremap N :set hlsearch<cr>N
 noremap / :set hlsearch incsearch<cr>/
 noremap ? :set hlsearch<cr>?
 noremap * *:set hlsearch<cr>
 
-map gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" others
+nnoremap <F3> :call SwitchMouseModel() <cr>
 
 " }
 
 " auto cmd {
 
+" close the preview window when completion is done
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
 " nohlsearch when cursorhold
 autocmd cursorhold,InsertEnter * set nohlsearch noincsearch
 
 " highlight the char with column index 80
-autocmd BufWinEnter *.h,*.cpp,*.c,*.py,*.js,*.sh,*.java let w:m2=matchadd('ErrorMsg', '\%81v.', -1)
+autocmd BufWinEnter *.h,*.cpp,*.c,*.py,*.sh let w:m2=matchadd('ErrorMsg', '\%81v.', -1)
 
 " delete the backspaces at the end of the line
 autocmd BufWritePre * exec ':%s/\s\+$//e'
@@ -315,14 +239,20 @@ autocmd BufWritePre * exec ':%s/\s\+$//e'
 " close the nerdtree when the target is empty
 autocmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q |
 
-" specify a function to be used for Insert mode omni completion
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-
 " specify the fold method in *.python, *.html, *.vue
-autocmd FileType python,html,vue set foldmethod=indent
+autocmd FileType python set foldmethod=indent
+
+" get correct comment highlighting for *.json
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" disable `indentLine` so that the quotes can be displayed normally
+autocmd FileType json IndentLinesDisable
 
 " not display listchars in Makefile
 autocmd FileType make set nolist
+
+" remap the keys for auto-pairs
+autocmd FileType * call AutoPairsInit()
 
 "}
 
